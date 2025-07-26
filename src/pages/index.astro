@@ -2,82 +2,83 @@
 import Layout from "../layouts/Layout.astro";
 import TestMap from "../components/TestMap.jsx";
 import Search from "../components/Search.astro";
-
-const items: string[] = [
-    "Taco Bell",
-    "McDonalds",
-    "Burger King",
-    "Wendy's",
-    "KFC",
-    "Subway",
-    "Pizza Hut",
-    "Domino's",
-    "Starbucks",
-    "Dunkin'",
-    "Chick-fil-A",
-    "Chipotle",
-    "Panda Express",
-    "Arby's",
-    "Sonic Drive-In",
-    "Dairy Queen",
-    "Five Guys",
-    "In-N-Out Burger",
-    "Popeyes",
-    "Shake Shack",
-    "Panera Bread",
-    "Olive Garden",
-    "Texas Roadhouse",
-    "Applebee's",
-    "Chili's",
-    "Red Lobster",
-    "Outback Steakhouse",
-    "Denny's",
-    "IHOP",
-    "Waffle House",
-    "Buffalo Wild Wings",
-    "TGI Fridays",
-    "Cracker Barrel",
-    "Cheesecake Factory",
-    "Ruth's Chris Steak House",
-    "Morton's The Steakhouse",
-    "LongHorn Steakhouse",
-    "Fogo de Chão",
-    "The Capital Grille",
-    "Bahama Breeze",
-    "Carrabba's Italian Grill",
-    "Bonefish Grill",
-    "P.F. Chang's",
-    "California Pizza Kitchen",
-    "Noodles & Company",
-    "Qdoba Mexican Eats",
-    "Moe's Southwest Grill",
-    "Jimmy John's",
-    "Jersey Mike's Subs",
-    "Firehouse Subs",
-    "Potbelly Sandwich Shop",
-    "Blaze Pizza",
-    "Mod Pizza",
-    "Crumbl Cookies",
-    "Insomnia Cookies",
-    "Jamba",
-    "Tropical Smoothie Cafe",
-    "Robeks",
-    "Auntie Anne's",
-    "Cinnabon",
-    "Wetzel's Pretzels",
-    "Krispy Kreme",
-    "Tim Hortons",
-    "Whataburger",
-    "Jack in the Box",
-];
+import "../styles/global.css";
 ---
 
 <Layout>
-    <div class="grid place-content-center mt-20">
-        <h1 class="text-3xl font-semibold mb-4">Hello, world!</h1>
-        <Search items={items} />
-        <div class="w-4xl">
-            <TestMap client:load />
+    <div class="w-[1920px] h-[1080px] relative bg-white overflow-hidden">
+        <div class="w-[846px] h-24 left-[114px] top-[312px] absolute bg-black rounded-[10px]"></div>
+        <div
+            class="w-[550px] h-9 left-[166px] top-[340px] absolute justify-start text-white text-3xl font-light font-['Nexa']"
+        >
+            Search by product or vendor
+        </div>
+        <div class="w-[753px] h-24 left-[166px] top-[539px] absolute justify-start">
+            <span class="text-black text-5xl font-normal font-['Nexa'] leading-[54px]">Map Your Way to the </span><br
+            /><span class="text-black italic text-5xl font-black font-['Nexa'] leading-[54px]">Best</span><span
+                class="text-black text-5xl font-normal font-['Nexa'] leading-[54px]"
+            >
+                Local Finds.</span
+            >
+        </div>
+        <div
+            class="w-[500px] h-10 left-[166px] top-[662px] absolute justify-start text-black text-4xl font-light font-['Nexa']"
+        >
+            See what the buzz is about
+        </div>
+        <div class="w-96 h-20 left-[114px] top-[93px] absolute bg-black rounded-[10px]"></div>
+        <div class="w-20 h-20 left-[870px] top-[322px] absolute bg-white rounded-[10px]"></div>
+        <div class="w-[719px] h-[663px] left-[1044px] top-[312px] absolute bg-black rounded-[10px]"></div>
+        <div class="w-36 h-20 left-[1044px] top-[99px] absolute bg-black rounded-[10px]"></div>
+        <div
+            class="w-24 h-9 left-[1063px] top-[117px] absolute justify-start text-white text-3xl font-light font-['Nexa']"
+        >
+            About
+        </div>
+        <div class="w-36 h-20 left-[1231px] top-[99px] absolute bg-black rounded-[10px]"></div>
+        <div
+            class="w-14 h-9 left-[1272px] top-[117px] absolute justify-start text-white text-3xl font-light font-['Nexa']"
+        >
+            Sell
+        </div>
+        <div class="w-36 h-20 left-[1418px] top-[99px] absolute bg-black rounded-[10px]"></div>
+        <div
+            class="w-24 h-9 left-[1436px] top-[117px] absolute justify-start text-white text-3xl font-light font-['Nexa']"
+        >
+            Events
+        </div>
+        <div class="w-36 h-20 left-[1605px] top-[99px] absolute bg-black rounded-[10px]"></div>
+        <div
+            class="w-32 h-9 left-[1619px] top-[117px] absolute justify-start text-white text-3xl font-bold font-['Nexa']"
+        >
+            Get App
+        </div>
+        <div
+            class="w-24 h-9 left-[202px] top-[112px] absolute justify-start text-white text-3xl font-normal font-['Nexa']"
+        >
+            Logo
+        </div>
+        <div
+            class="w-80 h-9 left-[1236px] top-[605px] absolute justify-start text-white text-3xl font-light font-['Nexa']"
+        >
+            Photoshop Composite
+        </div>
+        <div class="w-36 h-20 left-[166px] top-[776px] absolute bg-white rounded-[10px] border border-black"></div>
+        <div
+            class="w-24 h-7 left-[196px] top-[798px] absolute justify-start text-black text-2xl font-black font-['Nexa']"
+        >
+            LOG IN
+        </div>
+        <div class="w-72 h-20 left-[371px] top-[776px] absolute bg-stone-900 rounded-[10px]"></div>
+        <div
+            class="w-60 h-7 left-[403px] top-[798px] absolute justify-start text-white text-2xl font-black font-['Nexa']"
+        >
+            CREATE ACCOUNT
+        </div>
+        <div
+            class="w-80 h-7 left-[114px] top-[949px] absolute justify-start text-black text-2xl italic font-black font-['Nexa']"
+        >
+            Powered by Esri
         </div>
     </div>
 </Layout>
