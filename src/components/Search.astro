@@ -2,19 +2,31 @@
 interface Props {
     items: string[];
 }
-
 const { items } = Astro.props;
 ---
 
-<div>
-    <label for="search-box">Search:</label>
-    <input type="search" id="search-box" placeholder="Look for a business..." />
-    <div id="results-container"></div>
+<div class="relative max-w-xs mb-8">
+    <label for="search-box" class="sr-only">Search:</label>
+    <input
+        type="search"
+        id="search-box"
+        placeholder="Type here to search..."
+        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+    />
+
+    <div
+        id="results-container"
+        class="absolute top-full left-0 w-full z-10 bg-white border border-gray-300 rounded-b-md shadow-lg max-h-52 overflow-y-auto"
+    >
+    </div>
 </div>
 
 <script is:inline define:vars={{ items }}>
     const searchInput = document.getElementById("search-box");
     const resultsContainer = document.getElementById("results-container");
+
+    // Hide results container initially
+    resultsContainer.style.display = "none";
 
     searchInput.addEventListener("input", (e) => {
         const query = e.target.value.toLowerCase();
@@ -22,8 +34,8 @@ const { items } = Astro.props;
         // Clear previous results
         resultsContainer.innerHTML = "";
 
-        // If the search box is empty, don't show any results
         if (query.length === 0) {
+            resultsContainer.style.display = "none";
             return;
         }
 
@@ -31,11 +43,27 @@ const { items } = Astro.props;
             item.toLowerCase().includes(query),
         );
 
-        // Create and append results
+        if (filteredItems.length > 0) {
+            resultsContainer.style.display = "block";
+        } else {
+            resultsContainer.style.display = "none";
+        }
+
+        // Create and append results with Tailwind classes
         filteredItems.forEach((item) => {
             const resultElement = document.createElement("div");
+            // Add Tailwind classes for padding and hover effect
+            resultElement.className =
+                "px-3 py-2 cursor-pointer hover:bg-gray-100";
             resultElement.textContent = item;
             resultsContainer.appendChild(resultElement);
         });
+    });
+
+    // Optional: Hide results when clicking outside
+    document.addEventListener("click", (e) => {
+        if (!searchInput.contains(e.target)) {
+            resultsContainer.style.display = "none";
+        }
     });
 </script>
