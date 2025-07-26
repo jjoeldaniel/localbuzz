@@ -12,16 +12,22 @@ export default function GeoEnrichedMap() {
                 { default: Map },
                 { default: MapView },
                 { default: GraphicsLayer },
-                { default: Graphic }
+                { default: Graphic },
+                { default: BasemapGallery },
+                { default: Basemap }
             ] = await Promise.all([
                 import('@arcgis/core/Map'),
                 import('@arcgis/core/views/MapView'),
                 import('@arcgis/core/layers/GraphicsLayer'),
-                import('@arcgis/core/Graphic')
+                import('@arcgis/core/Graphic'),
+                import('@arcgis/core/widgets/BasemapGallery'),
+                import('@arcgis/core/Basemap'),
             ]);
 
-            // 1. Create map and view
-            const map = new Map({ basemap: 'topo-vector' });
+            const coloredPencilBasemap = new Basemap({
+                portalItem: { id: '826498a48bd0424f9c9315214f2165d4' }
+            });
+            const map = new Map({ basemap: coloredPencilBasemap });
             const enrichLayer = new GraphicsLayer();
             map.add(enrichLayer);
             view = new MapView({
@@ -77,15 +83,45 @@ export default function GeoEnrichedMap() {
             const rings = feat.geometry.rings;
             const spatialReference = featureSet.spatialReference;
 
+            // const popupTemplate = {
+            //     title: 'Enrichment Attributes',
+            //     content: [{
+            //         type: 'fields',
+            //         fieldInfos: Object.keys(feat.attributes).map(name => ({
+            //             fieldName: name,
+            //             label: featureSet.fieldAliases[name] || name
+            //         }))
+            //     }]
+            // };
+
             const popupTemplate = {
-                title: 'Enrichment Attributes',
-                content: [{
-                    type: 'fields',
-                    fieldInfos: Object.keys(feat.attributes).map(name => ({
-                        fieldName: name,
-                        label: featureSet.fieldAliases[name] || name
-                    }))
-                }]
+                title: `<div style="font-size:1.25rem; font-weight:600; color:#003366; margin-bottom:0.5rem;">Enriched Data for Area {ID}</div>`,
+                content: [
+                    {
+                        type: 'text',
+                        text: `**Total Population:** {TOTPOP}  
+**Households:** {TOTHH}  
+**Avg. Household Size:** {AVGHHSZ}`
+                    },
+                    {
+                        type: 'fields',
+                        fieldInfos: [
+                            { fieldName: 'TOTMALES', label: 'Male Pop.', visible: true, format: { digitSeparator: true } },
+                            { fieldName: 'TOTFEMALES', label: 'Female Pop.', visible: true, format: { digitSeparator: true } }
+                        ]
+                    },
+                    {
+                        type: 'text',
+                        text: '<div style="margin-top:1rem; font-size:0.9rem; color: red;">Data sourced from ArcGIS GeoEnrichment API.</div>'
+                    }
+                ],
+                actions: [
+                    {
+                        id: 'more-info',
+                        title: 'More Details',
+                        className: 'esri-icon-list' // use Esri CSS icon
+                    }
+                ]
             };
 
             // Build a Graphic and add to layer
@@ -103,7 +139,8 @@ export default function GeoEnrichedMap() {
             const graphic = new Graphic({
                 geometry: polygon,
                 symbol,
-                attributes: feat.attributes
+                attributes: feat.attributes,
+                popupTemplate
             });
             enrichLayer.add(graphic);
 
