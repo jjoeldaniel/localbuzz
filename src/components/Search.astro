@@ -11,7 +11,7 @@ const { items } = Astro.props;
 
     <div
         id="results-container"
-        class="absolute top-full left-0 w-[650px] z-10 bg-white border border-gray-300 mt-12 text-black rounded-b-lg shadow-lg max-h-52 overflow-y-auto"
+        class="absolute top-full left-0 w-[695px] z-10 bg-white border border-gray-300 mt-12 text-black rounded-b-lg shadow-lg max-h-52 overflow-y-auto"
     >
     </div>
 </div>
@@ -46,7 +46,7 @@ const { items } = Astro.props;
         filteredItems.forEach((item) => {
             const resultElement = document.createElement("div");
             // Add Tailwind classes for padding and hover effect
-            resultElement.className = "px-3 py-2 cursor-pointer hover:bg-gray-100";
+            resultElement.className = "px-3 py-2 cursor-pointer hover:bg-gray-100 hover:font-semibold";
             resultElement.textContent = item;
             resultsContainer.appendChild(resultElement);
         });
