@@ -7,10 +7,6 @@ import preact from '@astrojs/preact';
 export default defineConfig({
     vite: {
         plugins: [tailwindcss()],
-        define: {
-            // Expose the API key to client-side code
-            'import.meta.env.PUBLIC_ARCGIS_API_KEY': JSON.stringify(process.env.apikey)
-        }
     },
     integrations: [preact()],
 });
