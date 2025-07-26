@@ -1,10 +1,16 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "../layouts/Layout.astro"
+import TestMap from "../components/TestMap.jsx"
 ---
 
 <Layout>
-  <div class="grid place-content-center mt-20">
-    <h1 class="text-3xl font-semibold mb-4">Hello, world!</h1>
-    <span class="text-lg">woolooloo<span>
-  </div>
+    <div class="grid place-content-center mt-20">
+        <h1 class="text-3xl font-semibold mb-4">Hello, world!</h1>
+        <span class="text-lg">
+            woolooloo
+            <div>
+                <TestMap client:load />
+            </div>
+        </span>
+    </div>
 </Layout>
