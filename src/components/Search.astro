@@ -5,9 +5,9 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<div class="w-[650px] h-9 left-[166px] top-[340px] justify-start text-black text-3xl font-light font-['Nexa']">
+<div class="w-[600px] h-9 left-[166px] top-[340px] justify-start text-black text-3xl font-light font-['Nexa']">
     <label for="search-box" class="sr-only">Search:</label>
-    <input type="search" id="search-box" placeholder="Search by product or vendor" class="w-full" />
+    <input type="search" id="search-box" placeholder="Search by vendor or location" class="w-full focus:outline-none" />
 
     <div
         id="results-container"

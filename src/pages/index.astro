@@ -1,79 +1,76 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import TestMap from "../components/GeoMap.jsx";
+import { Image } from "astro:assets";
+import logo from "../images/logo.svg";
 import Search from "../components/Search.astro";
 import "../styles/global.css";
 ---
 
 <Layout>
     <div class="w-[1920px] h-[1080px] relative bg-white overflow-hidden">
-        <div class="w-[846px] h-24 left-[114px] top-[312px] absolute rounded-[10px] border-2 border-black"></div>
-        <div class="w-[550px] h-9 left-[166px] top-[340px] absolute justify-start text-3xl font-light font-['Nexa']">
-            <Search items={["Taco Bell", "McDonalds", "Jack in The Box"]} />
-        </div>
-        <div class="w-[753px] h-24 left-[166px] top-[539px] absolute justify-start">
-            <span class="text-black text-5xl font-normal font-['Nexa'] leading-[54px]">Map Your Way to the </span><br
-            /><span class="text-black italic text-5xl font-black font-['Nexa'] leading-[54px]">Best</span><span
-                class="text-black text-5xl font-normal font-['Nexa'] leading-[54px]"
-            >
-                Local Finds.</span
-            >
+        <div class="w-[550px] h-24 left-[114px] top-[539px] absolute justify-start">
+            <span class="text-black text-5xl font-normal font-['Nexa'] leading-[54px]">Map Your Way to the </span><span
+                class="text-buzz text-5xl font-black font-['Nexa'] leading-[54px] italic">Best</span
+            ><span class="text-black text-5xl font-normal font-['Nexa'] leading-[54px]"> Local Finds.</span>
         </div>
         <div
-            class="w-[500px] h-10 left-[166px] top-[662px] absolute justify-start text-black text-4xl font-light font-['Nexa']"
+            class="w-[455px] h-10 left-[114px] top-[662px] absolute justify-start text-black text-4xl font-light font-['Nexa']"
         >
             See what the buzz is about
         </div>
-        <div class="w-96 h-20 left-[114px] top-[93px] absolute bg-black rounded-[10px]"></div>
-        <div class="w-20 h-20 left-[870px] top-[322px] absolute bg-black rounded-[10px]"></div>
-        <div class="w-[719px] h-[663px] left-[1044px] top-[312px] absolute border border-black rounded-[10px]">
-            <TestMap client:load />
-        </div>
-        <div class="w-36 h-20 left-[1044px] top-[99px] absolute bg-black rounded-[10px]"></div>
+        <div class="w-[719px] h-[663px] left-[1044px] top-[312px] absolute bg-black rounded-[10px]"></div>
         <div
-            class="w-24 h-9 left-[1063px] top-[117px] absolute justify-start text-white text-3xl font-light font-['Nexa']"
+            class="w-24 h-9 left-[1067px] top-[114px] absolute justify-start text-black text-3xl font-light font-['Nexa']"
         >
             About
         </div>
-        <div class="w-36 h-20 left-[1231px] top-[99px] absolute bg-black rounded-[10px]"></div>
         <div
-            class="w-14 h-9 left-[1272px] top-[117px] absolute justify-start text-white text-3xl font-light font-['Nexa']"
+            class="w-12 h-9 left-[1275px] top-[114px] absolute justify-start text-black text-3xl font-light font-['Nexa']"
         >
             Sell
         </div>
-        <div class="w-36 h-20 left-[1418px] top-[99px] absolute bg-black rounded-[10px]"></div>
         <div
-            class="w-24 h-9 left-[1436px] top-[117px] absolute justify-start text-white text-3xl font-light font-['Nexa']"
+            class="w-24 h-9 left-[1438px] top-[114px] absolute justify-start text-black text-3xl font-light font-['Nexa']"
         >
             Events
         </div>
-        <div class="w-36 h-20 left-[1605px] top-[99px] absolute bg-black rounded-[10px]"></div>
+        <div class="w-40 h-12 left-[1598px] top-[110px] absolute bg-buzz rounded-[5px]"></div>
         <div
-            class="w-32 h-9 left-[1619px] top-[117px] absolute justify-start text-white text-3xl font-bold font-['Nexa']"
+            class="w-36 pr-2 h-11 left-[1609px] top-[114px] absolute text-center justify-start text-white text-3xl font-bold font-['Nexa']"
         >
             Get App
         </div>
         <div
-            class="w-24 h-9 left-[202px] top-[112px] absolute justify-start text-white text-3xl font-normal font-['Nexa']"
+            class="w-80 h-9 left-[1236px] top-[605px] absolute justify-start text-white text-3xl font-light font-['Nexa']"
         >
-            Logo
+            Photoshop Composite
         </div>
-        <div class="w-36 h-20 left-[166px] top-[776px] absolute bg-white rounded-[10px] border border-black"></div>
+        <div class="w-36 h-20 left-[114px] top-[776px] absolute bg-white rounded-[10px] border-2 border-neutral-300">
+        </div>
         <div
-            class="w-24 h-7 left-[196px] top-[798px] absolute justify-start text-black text-2xl font-black font-['Nexa']"
+            class="w-24 h-7 left-[144px] top-[798px] absolute justify-start text-black text-2xl font-black font-['Nexa']"
         >
             LOG IN
         </div>
-        <div class="w-72 h-20 left-[371px] top-[776px] absolute bg-stone-900 rounded-[10px]"></div>
+        <div class="w-72 h-20 left-[319px] top-[776px] absolute bg-buzz rounded-[10px]"></div>
         <div
-            class="w-60 h-7 left-[403px] top-[798px] absolute justify-start text-white text-2xl font-black font-['Nexa']"
+            class="w-60 h-7 left-[351px] top-[798px] absolute justify-start text-white text-2xl font-black font-['Nexa']"
         >
             CREATE ACCOUNT
         </div>
         <div
-            class="w-80 h-7 left-[114px] top-[949px] absolute justify-start text-black text-2xl italic font-black font-['Nexa']"
+            class="w-80 h-7 left-[114px] top-[949px] absolute justify-start text-black text-xl italic font-black font-['Nexa']"
         >
             Powered by Esri
         </div>
+        <div class="w-[772px] h-24 left-[114px] top-[312px] absolute rounded-[10px] border-2 border-neutral-300"></div>
+        <div
+            class="w-[501.89px] h-9 left-[144px] top-[340px] absolute justify-start text-black text-3xl font-light font-['Nexa']"
+        >
+            <Search items={["Taco Bell", "McDonalds", "Jack in The Box"]} />
+        </div>
+        <div class="w-20 h-20 left-[798px] top-[322px] absolute bg-black rounded-[10px]"></div>
+        <Image src={logo} alt="LocalBuzz Logo" class="w-[518px] h-32 left-[97px] top-[79px] absolute" />
     </div>
 </Layout>
