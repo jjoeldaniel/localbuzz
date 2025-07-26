@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --color-buzz: #EC9E00;
+}
+
 @font-face {
   font-family: 'Nexa';
   src: url('/fonts/Nexa-Thin.otf') format('opentype');
@@ -111,4 +115,3 @@
   font-style: italic;
   font-display: swap;
 }
-
