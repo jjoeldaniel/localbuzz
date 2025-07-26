@@ -1,17 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import TestMap from "../components/TestMap.jsx";
+import TestMap from "../components/GeoMap.jsx";
 import Search from "../components/Search.astro";
 import "../styles/global.css";
 ---
 
 <Layout>
     <div class="w-[1920px] h-[1080px] relative bg-white overflow-hidden">
-        <div class="w-[846px] h-24 left-[114px] top-[312px] absolute bg-black rounded-[10px]"></div>
-        <div
-            class="w-[550px] h-9 left-[166px] top-[340px] absolute justify-start text-white text-3xl font-light font-['Nexa']"
-        >
-            Search by product or vendor
+        <div class="w-[846px] h-24 left-[114px] top-[312px] absolute rounded-[10px] border-2 border-black"></div>
+        <div class="w-[550px] h-9 left-[166px] top-[340px] absolute justify-start text-3xl font-light font-['Nexa']">
+            <Search items={["Taco Bell", "McDonalds", "Jack in The Box"]} />
         </div>
         <div class="w-[753px] h-24 left-[166px] top-[539px] absolute justify-start">
             <span class="text-black text-5xl font-normal font-['Nexa'] leading-[54px]">Map Your Way to the </span><br
@@ -27,8 +25,10 @@ import "../styles/global.css";
             See what the buzz is about
         </div>
         <div class="w-96 h-20 left-[114px] top-[93px] absolute bg-black rounded-[10px]"></div>
-        <div class="w-20 h-20 left-[870px] top-[322px] absolute bg-white rounded-[10px]"></div>
-        <div class="w-[719px] h-[663px] left-[1044px] top-[312px] absolute bg-black rounded-[10px]"></div>
+        <div class="w-20 h-20 left-[870px] top-[322px] absolute bg-black rounded-[10px]"></div>
+        <div class="w-[719px] h-[663px] left-[1044px] top-[312px] absolute border border-black rounded-[10px]">
+            <TestMap client:load />
+        </div>
         <div class="w-36 h-20 left-[1044px] top-[99px] absolute bg-black rounded-[10px]"></div>
         <div
             class="w-24 h-9 left-[1063px] top-[117px] absolute justify-start text-white text-3xl font-light font-['Nexa']"
@@ -57,11 +57,6 @@ import "../styles/global.css";
             class="w-24 h-9 left-[202px] top-[112px] absolute justify-start text-white text-3xl font-normal font-['Nexa']"
         >
             Logo
-        </div>
-        <div
-            class="w-80 h-9 left-[1236px] top-[605px] absolute justify-start text-white text-3xl font-light font-['Nexa']"
-        >
-            Photoshop Composite
         </div>
         <div class="w-36 h-20 left-[166px] top-[776px] absolute bg-white rounded-[10px] border border-black"></div>
         <div
