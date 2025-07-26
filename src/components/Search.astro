@@ -1,0 +1,41 @@
+---
+interface Props {
+    items: string[];
+}
+
+const { items } = Astro.props;
+---
+
+<div>
+    <label for="search-box">Search:</label>
+    <input type="search" id="search-box" placeholder="Look for a business..." />
+    <div id="results-container"></div>
+</div>
+
+<script is:inline define:vars={{ items }}>
+    const searchInput = document.getElementById("search-box");
+    const resultsContainer = document.getElementById("results-container");
+
+    searchInput.addEventListener("input", (e) => {
+        const query = e.target.value.toLowerCase();
+
+        // Clear previous results
+        resultsContainer.innerHTML = "";
+
+        // If the search box is empty, don't show any results
+        if (query.length === 0) {
+            return;
+        }
+
+        const filteredItems = items.filter((item) =>
+            item.toLowerCase().includes(query),
+        );
+
+        // Create and append results
+        filteredItems.forEach((item) => {
+            const resultElement = document.createElement("div");
+            resultElement.textContent = item;
+            resultsContainer.appendChild(resultElement);
+        });
+    });
+</script>
