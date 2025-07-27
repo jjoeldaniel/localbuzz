@@ -1,5 +1,6 @@
 import { h } from 'preact'
 import { useState, useRef, useEffect } from 'preact/hooks'
+import { useArcGISMap } from './useArcMap';
 import GeoEnrichedMap from './MerchantMap'
 import DashGrid from './DashGrid'
 
@@ -8,10 +9,8 @@ export default function Dashboard({ portalItemId }) {
     const [selectedPoint, onMainPinChange] = useState(null)
     const mapContainerRef = useRef(null)
 
-    useEffect(() => {
-
-        console.log("pointHere", JSON.parse(selectedPoint)?.hexagon?.graphic?.attributes?.thematic_value2);
-    }, [selectedPoint])
+    // always call the hook—whenever mapContainerRef.current is rendered
+    useArcGISMap(mapContainerRef, portalItemId, onMainPinChange);
 
 
     // When DashGrid’s “map card” is clicked:
@@ -25,7 +24,7 @@ export default function Dashboard({ portalItemId }) {
             <div className="w-full h-full flex flex-col p-6">
                 <button
                     onClick={backToDashboard}
-                    className="mb-4 text-sm underline"
+                    className=" text-sm underline"
                 >
                     ← Back to Dashboard
                 </button>
@@ -115,9 +114,11 @@ export default function Dashboard({ portalItemId }) {
                     {/* Dashboard Main View */}
                     <div className="flex-1 bg-neutral-100 rounded-[20px] overflow-hidden">
                         <DashGrid
+                            portalItemId={portalItemId}
                             mapContainerRef={mapContainerRef}
                             selectedPoint={selectedPoint}
-                            onMapClick={openMap}
+                            onMainPinChange={onMainPinChange}
+                            onMapClick={() => setViewMode('map')}
                         />
                     </div>
                 </div>

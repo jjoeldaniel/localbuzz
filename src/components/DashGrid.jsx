@@ -1,7 +1,9 @@
 // src/components/Dashboard.jsx
 import { h } from 'preact';
 
-export default function DashGrid({ mapContainerRef, selectedPoint, onMapClick }) {
+import { useArcGISMap } from './useArcMap';
+
+export default function DashGrid({ mapContainerRef, selectedPoint, onMapClick, portalItemId, onMainPinChange }) {
 
     const dollarFormatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
@@ -9,6 +11,9 @@ export default function DashGrid({ mapContainerRef, selectedPoint, onMapClick })
         minimumFractionDigits: 0,
         maximumFractionDigits: 0
     });
+
+    // reuse the same singleton view
+    useArcGISMap(mapContainerRef, portalItemId, onMainPinChange);
 
 
     return (
@@ -91,7 +96,6 @@ export default function DashGrid({ mapContainerRef, selectedPoint, onMapClick })
 
                 {/* 5) Map (sps 2 columns) */}
                 <div className="col-span-2 rounded-[10px] border-2 border-neutral-300 bg-white overflow-hidden" onClick={onMapClick}>
-                    {mapContainerRef != null ? "y" : "n"}
                     <div ref={mapContainerRef} className="w-full h-full" />
                 </div>
 

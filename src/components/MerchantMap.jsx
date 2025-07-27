@@ -5,6 +5,8 @@ import { useState, useEffect, useRef, useMemo } from 'preact/hooks';
 import SimpleMarkerSymbol from '@arcgis/core/symbols/SimpleMarkerSymbol';
 import Graphic from '@arcgis/core/Graphic';
 
+import { useArcGISMap } from './useArcMap';
+
 const FILTER_STATES = {
     NONE: 0,
     ASC: 1,
@@ -68,6 +70,9 @@ export default function GeoEnrichedMap({ portalItemId, onMainPinChange, mapConta
     const viewRef = useRef(null);
     const markerLayerRef = useRef(null);
     const highlightLayerRef = useRef(null);
+
+    // initialize the map into mapContainerRef
+    useArcGISMap(mapContainerRef, portalItemId, onMainPinChange);
 
     const keyMap = {
         "thematic_value2": "2025 Median Household Income",

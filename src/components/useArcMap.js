@@ -1,39 +1,68 @@
+// src/hooks/useArcGISMap.js
 import { useEffect, useRef } from 'preact/hooks';
-import Map from '@arcgis/core/Map';
-import MapView from '@arcgis/core/views/MapView';
 
-let _view;          // singleton
-let _portalItemId;  // to detect portal changes
+let _view;               // singleton MapView
+let _lastPortalItemId;   // remember which portalItemId we used
 
 export function useArcGISMap(containerRef, portalItemId, onMainPinChange) {
-    // keep a ref to track first‐time init
-    const inited = useRef(false);
+    const initialized = useRef(false);
 
     useEffect(() => {
         if (!containerRef.current) return;
-        // 1) First time ever OR portalItemId changed?
-        if (!inited.current || _portalItemId !== portalItemId) {
-            _portalItemId = portalItemId;
-            // dispose old view if exists
-            if (_view) _view.destroy();
-            // create a brand new MapView
-            _view = new MapView({
-                container: containerRef.current,
-                map: new Map({ basemap: 'streets' /* or your portalItemId basemap */ }),
-                center: [-117.173, 34.0397],
-                zoom: 12
-            });
-            // wire your click handler for onMainPinChange
-            _view.on('click', evt => {
-                const lat = evt.mapPoint.latitude.toFixed(6);
-                const lon = evt.mapPoint.longitude.toFixed(6);
-                onMainPinChange(JSON.stringify({ latitude: lat, longitude: lon }));
-            });
-            inited.current = true;
-        } else {
-            // subsequent: just re‐parent the existing view into the new container
-            _view.container = containerRef.current;
-        }
-        return () => { /* we do NOT destroy here—keep the singleton alive */ };
+
+        (async () => {
+            // dynamic import of everything inside the effect
+            const [
+                { default: Map },
+                { default: MapView },
+                { default: FeatureLayer },
+                { default: Basemap },
+                { default: GroupLayer },
+                { webMercatorToGeographic },
+                { default: GraphicsLayer },
+            ] = await Promise.all([
+                import('@arcgis/core/Map'),
+                import('@arcgis/core/views/MapView'),
+                import('@arcgis/core/layers/FeatureLayer'),
+                import('@arcgis/core/Basemap'),
+                import('@arcgis/core/layers/GroupLayer'),
+                import('@arcgis/core/geometry/support/webMercatorUtils'),
+                import('@arcgis/core/layers/GraphicsLayer'),
+            ]);
+
+            // if this is the first time or the portalItemId changed, recreate view
+            if (!initialized.current || portalItemId !== _lastPortalItemId) {
+                // destroy old view if exists
+                if (_view) {
+                    _view.container = null;
+                    _view.destroy();
+                }
+
+                const basemap = new Basemap({ portalItem: { id: portalItemId } });
+                const map = new Map({ basemap });
+
+                _view = new MapView({
+                    container: containerRef.current,
+                    map,
+                    center: [-117.173, 34.0397],
+                    zoom: 12,
+                });
+
+                // example click handler hooking into your onMainPinChange
+                _view.on('click', evt => {
+                    const gp = webMercatorToGeographic(evt.mapPoint);
+                    onMainPinChange(JSON.stringify({
+                        latitude: gp.latitude.toFixed(6),
+                        longitude: gp.longitude.toFixed(6)
+                    }));
+                });
+
+                initialized.current = true;
+                _lastPortalItemId = portalItemId;
+            } else {
+                // just move existing view into this new container
+                _view.container = containerRef.current;
+            }
+        })();
     }, [containerRef, portalItemId, onMainPinChange]);
 }
