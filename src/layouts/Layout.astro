@@ -3,7 +3,7 @@ import "../styles/global.css"
 import Navbar from "../components/Navbar.astro"
 ---
 
-<html lang="en">
+<html lang="en" class="h-full">
     <head>
         <meta charset="utf-8" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -15,8 +15,10 @@ import Navbar from "../components/Navbar.astro"
         />
         <title>Astro</title>
     </head>
-    <body class="grid place-content-center mt-10">
-        <Navbar example="Hello, world!" />
-        <slot />
+    <body class="h-screen flex flex-col">
+        <Navbar example="Hello" />
+        <main class="flex-1 flex">
+            <slot />
+        </main>
     </body>
 </html>

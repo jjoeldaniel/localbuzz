@@ -1,7 +1,8 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import TestMap from "../components/TestMap.jsx";
-import Search from "../components/Search.astro";
+import Layout from "../layouts/Layout.astro"
+import TestMap from "../components/TestMap.jsx"
+import Search from "../components/Search.astro"
+import GeoEnrichedMap from "../components/GeoMap.jsx"
 
 const items: string[] = [
     "Taco Bell",
@@ -69,7 +70,7 @@ const items: string[] = [
     "Tim Hortons",
     "Whataburger",
     "Jack in the Box",
-];
+]
 ---
 
 <Layout>
@@ -77,7 +78,7 @@ const items: string[] = [
         <h1 class="text-3xl font-semibold mb-4">Hello, world!</h1>
         <Search items={items} />
         <div class="w-4xl">
-            <TestMap client:load />
+            <GeoEnrichedMap client:load />
         </div>
     </div>
 </Layout>
