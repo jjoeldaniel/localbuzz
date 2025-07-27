@@ -5,18 +5,13 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<div class="relative max-w-xs mb-8">
+<div class="w-[600px] h-9 left-[166px] top-[340px] justify-start text-black text-3xl font-light font-['Nexa']">
     <label for="search-box" class="sr-only">Search:</label>
-    <input
-        type="search"
-        id="search-box"
-        placeholder="Type here to search..."
-        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-    />
+    <input type="search" id="search-box" placeholder="Search by vendor or location" class="w-full focus:outline-none" />
 
     <div
         id="results-container"
-        class="absolute top-full left-0 w-full z-10 bg-white border border-gray-300 rounded-b-md shadow-lg max-h-52 overflow-y-auto"
+        class="absolute top-full left-0 w-[695px] z-10 bg-white border border-gray-300 mt-12 text-black rounded-b-lg shadow-lg max-h-52 overflow-y-auto"
     >
     </div>
 </div>
@@ -39,9 +34,7 @@ const { items } = Astro.props;
             return;
         }
 
-        const filteredItems = items.filter((item) =>
-            item.toLowerCase().includes(query),
-        );
+        const filteredItems = items.filter((item) => item.toLowerCase().includes(query));
 
         if (filteredItems.length > 0) {
             resultsContainer.style.display = "block";
@@ -53,8 +46,7 @@ const { items } = Astro.props;
         filteredItems.forEach((item) => {
             const resultElement = document.createElement("div");
             // Add Tailwind classes for padding and hover effect
-            resultElement.className =
-                "px-3 py-2 cursor-pointer hover:bg-gray-100";
+            resultElement.className = "px-3 py-2 cursor-pointer hover:bg-gray-100 hover:font-semibold";
             resultElement.textContent = item;
             resultsContainer.appendChild(resultElement);
         });
