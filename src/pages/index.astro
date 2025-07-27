@@ -1,84 +1,107 @@
 ---
 import Layout from "../layouts/Layout.astro"
-import TestMap from "../components/TestMap.jsx"
+import TestMap from "../components/GeoMap.jsx"
+import { Image } from "astro:assets"
+import logo from "../images/logo.svg"
 import Search from "../components/Search.astro"
-import GeoEnrichedMap from "../components/GeoMap.jsx"
-
-const items: string[] = [
-    "Taco Bell",
-    "McDonalds",
-    "Burger King",
-    "Wendy's",
-    "KFC",
-    "Subway",
-    "Pizza Hut",
-    "Domino's",
-    "Starbucks",
-    "Dunkin'",
-    "Chick-fil-A",
-    "Chipotle",
-    "Panda Express",
-    "Arby's",
-    "Sonic Drive-In",
-    "Dairy Queen",
-    "Five Guys",
-    "In-N-Out Burger",
-    "Popeyes",
-    "Shake Shack",
-    "Panera Bread",
-    "Olive Garden",
-    "Texas Roadhouse",
-    "Applebee's",
-    "Chili's",
-    "Red Lobster",
-    "Outback Steakhouse",
-    "Denny's",
-    "IHOP",
-    "Waffle House",
-    "Buffalo Wild Wings",
-    "TGI Fridays",
-    "Cracker Barrel",
-    "Cheesecake Factory",
-    "Ruth's Chris Steak House",
-    "Morton's The Steakhouse",
-    "LongHorn Steakhouse",
-    "Fogo de Chão",
-    "The Capital Grille",
-    "Bahama Breeze",
-    "Carrabba's Italian Grill",
-    "Bonefish Grill",
-    "P.F. Chang's",
-    "California Pizza Kitchen",
-    "Noodles & Company",
-    "Qdoba Mexican Eats",
-    "Moe's Southwest Grill",
-    "Jimmy John's",
-    "Jersey Mike's Subs",
-    "Firehouse Subs",
-    "Potbelly Sandwich Shop",
-    "Blaze Pizza",
-    "Mod Pizza",
-    "Crumbl Cookies",
-    "Insomnia Cookies",
-    "Jamba",
-    "Tropical Smoothie Cafe",
-    "Robeks",
-    "Auntie Anne's",
-    "Cinnabon",
-    "Wetzel's Pretzels",
-    "Krispy Kreme",
-    "Tim Hortons",
-    "Whataburger",
-    "Jack in the Box",
-]
+import "../styles/global.css"
 ---
 
 <Layout>
-    <div class="grid place-content-center mt-20">
-        <h1 class="text-3xl font-semibold mb-4">Hello, world!</h1>
-        <Search items={items} />
-        <div class="w-4xl">
-            <GeoEnrichedMap client:load />
+    <div class="w-[1920px] h-[1080px] relative bg-white overflow-hidden">
+        <div
+            class="w-[750px] h-44 left-[125px] top-[484px] absolute justify-start"
+        >
+            <span
+                class="text-black text-7xl font-normal font-['Nexa'] leading-[80px]"
+                >Map Your Way to <br />the
+            </span><span
+                class="text-buzz text-7xl font-black font-['Nexa'] leading-[80px] italic"
+                >Best</span
+            ><span
+                class="text-black text-7xl font-normal font-['Nexa'] leading-[80px]"
+            >
+                Local Finds.</span
+            >
         </div>
+        <div
+            class="w-[733px] h-20 left-[125px] top-[668px] absolute justify-start text-black text-5xl font-light font-['Nexa']"
+        >
+            See what the buzz is about!
+        </div>
+        <div
+            class="w-[859px] h-[663px] left-[904px] top-[312px] absolute bg-black rounded-[10px]"
+        >
+        </div>
+        <div
+            class="w-24 h-9 left-[1067px] top-[114px] absolute justify-start text-black text-3xl font-light font-['Nexa']"
+        >
+            About
+        </div>
+        <div
+            class="w-12 h-9 left-[1275px] top-[114px] absolute justify-start text-black text-3xl font-light font-['Nexa']"
+        >
+            Sell
+        </div>
+        <div
+            class="w-24 h-9 left-[1438px] top-[114px] absolute justify-start text-black text-3xl font-light font-['Nexa']"
+        >
+            Events
+        </div>
+        <div
+            class="w-40 h-12 left-[1598px] top-[110px] absolute bg-buzz rounded-[5px]"
+        >
+        </div>
+        <div
+            class="w-36 h-11 pr-2 left-[1609px] top-[114px] absolute text-center justify-start text-white text-3xl font-bold font-['Nexa']"
+        >
+            Get App
+        </div>
+        <div
+            class="w-80 h-9 left-[1236px] top-[605px] absolute justify-start text-white text-3xl font-light font-['Nexa']"
+        >
+            Photoshop Composite
+        </div>
+        <div
+            class="w-[338px] h-16 left-[310px] top-[792px] absolute bg-buzz rounded-[5px]"
+        >
+        </div>
+        <div
+            class="w-40 h-16 left-[125px] top-[792px] absolute bg-buzz rounded-[5px]"
+        >
+        </div>
+        <div
+            class="w-100 h-14 place-content-center left-[335px] top-[798px] absolute justify-start text-white text-3xl font-black font-['Nexa']"
+        >
+            CREATE ACCOUNT
+        </div>
+        <div
+            class="w-36 h-14 pt-2 left-[150px] top-[798px] absolute justify-start text-white text-3xl font-black font-['Nexa']"
+        >
+            LOG IN
+        </div>
+        <div
+            class="w-80 h-7 left-[114px] top-[945px] absolute justify-start text-black text-xl font-black font-['Nexa'] italic"
+        >
+            Powered by Esri
+        </div>
+        <div
+            class="w-[723px] h-24 left-[114px] top-[312px] absolute rounded-[10px] border-2 border-neutral-300"
+        >
+        </div>
+        <div
+            class="w-[470.04px] h-9 left-[142.10px] top-[340px] absolute justify-start text-black text-3xl font-light font-['Nexa']"
+        >
+            <Search items={["McDonald's", "Jack in the Box", "In n Out"]} />
+        </div>
+        <div
+            class="w-18 h-20 left-[755px] top-[322px] absolute bg-buzz rounded-[10px]"
+        >
+        </div>
+        <Image
+            src={logo}
+            alt="LocalBuzz Logo"
+            class="w-[518px] h-32 left-[97px] top-[79px] absolute"
+        />
     </div>
 </Layout>

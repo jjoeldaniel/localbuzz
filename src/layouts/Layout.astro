@@ -1,9 +1,9 @@
 ---
 import "../styles/global.css"
-import Navbar from "../components/Navbar.astro"
+const { title = "LocalBuzz" } = Astro.props
 ---
 
-<html lang="en" class="h-full">
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -13,12 +13,9 @@ import Navbar from "../components/Navbar.astro"
             rel="stylesheet"
             href="https://js.arcgis.com/4.29/esri/themes/light/main.css"
         />
-        <title>Astro</title>
+        <title>{title}</title>
     </head>
-    <body class="h-screen flex flex-col">
-        <Navbar example="Hello" />
-        <main class="flex-1 flex">
-            <slot />
-        </main>
+    <body>
+        <slot />
     </body>
 </html>
