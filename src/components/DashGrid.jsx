@@ -1,7 +1,16 @@
 // src/components/Dashboard.jsx
 import { h } from 'preact';
 
-export default function DashGrid({ mapContainerRef }) {
+export default function DashGrid({ mapContainerRef, selectedPoint, onMapClick }) {
+
+    const dollarFormatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+    });
+
+
     return (
         <div className="w-full h-full p-6 flex flex-col space-y-6">
             {/* Header */}
@@ -38,7 +47,7 @@ export default function DashGrid({ mapContainerRef }) {
                 {/* 3) Median HH Income */}
                 <div className="rounded-[10px] border-2 border-neutral-300 bg-white p-4 flex flex-col items-start">
                     <div className="bg-amber-500 rounded-[10px] w-24 h-24 mb-2" />
-                    <div className="text-lg font-['Nexa'] font-black">$130,305</div>
+                    <div className="text-lg font-['Nexa'] font-black">{selectedPoint != null ? dollarFormatter.format(JSON.parse(selectedPoint)?.hexagon?.graphic?.attributes?.thematic_value2) : " No Point"}</div>
                     <div className="text-sm font-['Nexa'] font-light">Median Household Income</div>
                     <div className="mt-1 text-sm text-[10px] font-['Nexa'] font-light">
                         37.2% higher than the&nbsp;
@@ -76,12 +85,13 @@ export default function DashGrid({ mapContainerRef }) {
 
                     <p className="h-20 text-sm justify-start text-black text-base font-light font-['Nexa'] leading-none">
                         <span class="text-sm text-black text-base font-black font-['Nexa'] leading-none">Burbs and Beyond</span>
-                        <p>accounts for 57.1% of households in the same area which is 54.3% higher than the U.S.</p>
+                        accounts for 57.1% of households in the same area which is 54.3% higher than the U.S.
                     </p>
                 </div>
 
                 {/* 5) Map (sps 2 columns) */}
-                <div className="col-span-2 rounded-[10px] border-2 border-neutral-300 bg-white overflow-hidden">
+                <div className="col-span-2 rounded-[10px] border-2 border-neutral-300 bg-white overflow-hidden" onClick={onMapClick}>
+                    {mapContainerRef != null ? "y" : "n"}
                     <div ref={mapContainerRef} className="w-full h-full" />
                 </div>
 

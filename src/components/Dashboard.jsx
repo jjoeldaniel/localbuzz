@@ -1,9 +1,46 @@
-// src/components/Dashboard.jsx
-import { h } from 'preact';
-import { scaleX, scaleY } from '../utils/scale';
-import DashGrid from './DashGrid';
+import { h } from 'preact'
+import { useState, useRef, useEffect } from 'preact/hooks'
+import GeoEnrichedMap from './MerchantMap'
+import DashGrid from './DashGrid'
 
-export default function Dashboard() {
+export default function Dashboard({ portalItemId }) {
+    const [viewMode, setViewMode] = useState('dashboard')   // 'dashboard' or 'map'
+    const [selectedPoint, onMainPinChange] = useState(null)
+    const mapContainerRef = useRef(null)
+
+    useEffect(() => {
+
+        console.log("pointHere", JSON.parse(selectedPoint)?.hexagon?.graphic?.attributes?.thematic_value2);
+    }, [selectedPoint])
+
+
+    // When DashGrid’s “map card” is clicked:
+    const openMap = () => setViewMode('map')
+    // Back button on full‑screen map:
+    const backToDashboard = () => setViewMode('dashboard')
+
+    if (viewMode === 'map') {
+        // Full‑screen map view
+        return (
+            <div className="w-full h-full flex flex-col p-6">
+                <button
+                    onClick={backToDashboard}
+                    className="mb-4 text-sm underline"
+                >
+                    ← Back to Dashboard
+                </button>
+                <div className="flex-1 rounded-[20px] overflow-hidden border-2 border-neutral-300">
+                    <GeoEnrichedMap
+                        portalItemId={portalItemId}
+                        mapContainerRef={mapContainerRef}
+                        onMainPinChange={onMainPinChange}
+                    />
+                </div>
+            </div>
+        )
+    }
+
+    // Otherwise: dashboard grid + (optionally) sidebar/search
     return (
         <div className="w-full h-full flex flex-col p-20">
             <div className="w-full h-full flex ">
@@ -71,12 +108,20 @@ export default function Dashboard() {
                         </button>
                     </div>
 
+                    {
+                        selectedPoint?.hexagon?.graphic?.attributes?.thematic_value2
+                    }
+
                     {/* Dashboard Main View */}
                     <div className="flex-1 bg-neutral-100 rounded-[20px] overflow-hidden">
-                        <DashGrid></DashGrid>
+                        <DashGrid
+                            mapContainerRef={mapContainerRef}
+                            selectedPoint={selectedPoint}
+                            onMapClick={openMap}
+                        />
                     </div>
                 </div>
             </div>
         </div>
-    );
+    )
 }

@@ -59,7 +59,7 @@ function FilterBtn({ title, state, setState }) {
     );
 }
 
-export default function GeoEnrichedMap({ portalItemId, onMainPinChange }) {
+export default function GeoEnrichedMap({ portalItemId, onMainPinChange, mapContainerRef }) {
     const viewDiv = useRef(null);
     const [selectedAttrs, setSelectedAttrs] = useState(null);
     const [featureLayers, setFeatureLayers] = useState([]);
@@ -168,7 +168,7 @@ export default function GeoEnrichedMap({ portalItemId, onMainPinChange }) {
 
 
             view = new MapView({
-                container: viewDiv.current,
+                container: mapContainerRef.current,
                 map,
                 center: [-117.173, 34.0397],
                 zoom: 12
@@ -438,7 +438,7 @@ export default function GeoEnrichedMap({ portalItemId, onMainPinChange }) {
 
                 {/* Map */}
                 <div
-                    ref={viewDiv}
+                    ref={mapContainerRef}
                     className="flex-1 bg-neutral-100 rounded-[20px] overflow-hidden"
                 />
             </div>
