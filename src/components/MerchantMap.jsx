@@ -153,9 +153,8 @@ export default function GeoEnrichedMap({ portalItemId, onMainPinChange }) {
 
 
             const serviceUrl = "https://services6.arcgis.com/lY62PNsqcliFwZwn/arcgis/rest/services/kfrankland_GlobalOps__193f4460ced34c8c/FeatureServer";
-            // const serviceUrl = "https://services6.arcgis.com/lY62PNsqcliFwZwn/arcgis/rest/services/kfrankland_GlobalOps__d416fb3b94534208/FeatureServer";
             const layerIds = [0, 2, 3];  // adjust if more/less
-            const featureLayers = layerIds.map(id =>
+            let featureLayers = layerIds.map(id =>
                 new FeatureLayer({
                     url: `${serviceUrl}/${id}`,
                     outFields: ['*'],       // return all fields
@@ -164,6 +163,17 @@ export default function GeoEnrichedMap({ portalItemId, onMainPinChange }) {
                     maxScale: 0
                 })
             );
+
+            const serviceUrlEnv = "https://services6.arcgis.com/lY62PNsqcliFwZwn/arcgis/rest/services/kfrankland_GlobalOps__d416fb3b94534208/FeatureServer";
+
+            const envData = new FeatureLayer({
+                url: `${serviceUrlEnv}/${3}`,
+                outFields: ['*'],       // return all fields
+                popupEnabled: false,     // we’ll render our own sidebar
+                minScale: 0,   // no zoom‑out limit
+                maxScale: 0,
+            })
+            featureLayers.push(envData);
 
 
             // 4. optionally group them in one entry
