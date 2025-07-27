@@ -5,6 +5,7 @@ import logo from "../images/logo.svg";
 import logo_bee from "../images/logo_bee.svg";
 import search_icon from "../images/search_icon.svg";
 import Search from "../components/Search.astro";
+import RedlandsMap from "../components/RedlandsMap";
 import "../styles/global.css";
 ---
 
@@ -48,7 +49,7 @@ import "../styles/global.css";
                 Floral
             </div>
         </div>
-        <div class="w-[572px] h-[432px] left-[141px] top-[544px] absolute  overflow-scroll scrollbar-hidden">
+        <div class="w-[572px] h-[432px] left-[141px] top-[544px] absolute overflow-scroll scrollbar-hidden">
             <div class="w-[515px] h-10 left-0 top-[278px] absolute justify-start">
                 <span class="text-black text-base font-black font-['Nexa']">$$</span><span
                     class="text-neutral-300 text-base font-black font-['Nexa']">$$$</span
@@ -99,23 +100,23 @@ import "../styles/global.css";
                 Offering buttercream wedding cakes and curated dessert tables.
             </div>
             <div
-                class="w-[770.50px] h-0 left-0 top-[165px] absolute outline outline-1 outline-offset-[-0.50px] outline-neutral-300"
+                class="w-[770.50px] h-0 left-0 top-[165px] absolute outline-1 outline-offset-[-0.50px] outline-neutral-300"
             >
             </div>
             <div
-                class="w-[770.50px] h-0 left-0 top-[326px] absolute outline outline-1 outline-offset-[-0.50px] outline-neutral-300"
+                class="w-[770.50px] h-0 left-0 top-[326px] absolute outline-1 outline-offset-[-0.50px] outline-neutral-300"
             >
             </div>
             <div
-                class="w-[770.50px] h-0 left-0 top-[479px] absolute outline outline-1 outline-offset-[-0.50px] outline-neutral-300"
+                class="w-[770.50px] h-0 left-0 top-[479px] absolute outline-1 outline-offset-[-0.50px] outline-neutral-300"
             >
             </div>
             <div
-                class="w-[770.50px] h-0 left-0 top-[641px] absolute outline outline-1 outline-offset-[-0.50px] outline-neutral-300"
+                class="w-[770.50px] h-0 left-0 top-[641px] absolute outline-1 outline-offset-[-0.50px] outline-neutral-300"
             >
             </div>
             <div
-                class="w-[770.50px] h-0 left-0 top-[783px] absolute outline outline-1 outline-offset-[-0.50px] outline-neutral-300"
+                class="w-[770.50px] h-0 left-0 top-[783px] absolute outline-1 outline-offset-[-0.50px] outline-neutral-300"
             >
             </div>
             <div class="w-[515px] h-10 left-0 top-[606px] absolute justify-start">
@@ -163,11 +164,18 @@ import "../styles/global.css";
             </div>
         </div>
 
-        <div class="w-[859px] h-[663px] left-[904px] top-[312px] absolute bg-black rounded-[10px]"></div>
+        <div class="w-[859px] h-[663px] left-[904px] top-[312px] absolute rounded-[10px]">
+            <a href="/map"
+                ><RedlandsMap
+                    client:load
+                    featureLayerUrl={"https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/FinalBusinessFeature/FeatureServer"}
+                /></a
+            >
+        </div>
         <div
             class="w-24 h-9 left-[1067px] top-[114px] absolute justify-start text-black text-3xl font-light font-['Nexa']"
         >
-      <a href="/shop">Shop</a>
+            <a href="/shop">Shop</a>
         </div>
         <div
             class="w-12 h-9 left-[1275px] top-[114px] absolute justify-start text-black text-3xl font-light font-['Nexa']"
