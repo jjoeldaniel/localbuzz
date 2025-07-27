@@ -7,6 +7,15 @@ import search_icon from "../images/search_icon.svg";
 import composite from "../images/composite.png";
 import Search from "../components/Search.astro";
 import "../styles/global.css";
+
+const items: string[] = [
+    "Blaylock Brittle Co",
+    "Cedar Ave Blooms",
+    "Citrus Blossom Bakery LLC",
+    "Cleopatra Pastarrie",
+    "Dan’s Doughs",
+    "Freeze Dried Fairy",
+];
 ---
 
 <Layout>
@@ -83,7 +92,7 @@ import "../styles/global.css";
         <div
             class="w-[470.04px] h-9 left-[142.10px] top-[340px] absolute justify-start text-black text-3xl font-light font-['Nexa']"
         >
-            <Search items={["McDonald's", "Jack in the Box", "In n Out"]} />
+            <Search items={items} />
         </div>
         <Image
             alt="Magnifying glass"
