@@ -9,8 +9,9 @@ export default function Dashboard({ portalItemId }) {
     const [selectedPoint, onMainPinChange] = useState(null)
     const mapContainerRef = useRef(null)
 
+
     // always call the hook—whenever mapContainerRef.current is rendered
-    useArcGISMap(mapContainerRef, portalItemId, onMainPinChange);
+    useArcGISMap(mapContainerRef, portalItemId, onMainPinChange, selectedPoint);
 
 
     // When DashGrid’s “map card” is clicked:

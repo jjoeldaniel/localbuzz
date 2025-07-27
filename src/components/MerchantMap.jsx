@@ -5,8 +5,6 @@ import { useState, useEffect, useRef, useMemo } from 'preact/hooks';
 import SimpleMarkerSymbol from '@arcgis/core/symbols/SimpleMarkerSymbol';
 import Graphic from '@arcgis/core/Graphic';
 
-import { useArcGISMap } from './useArcMap';
-
 const FILTER_STATES = {
     NONE: 0,
     ASC: 1,
@@ -61,7 +59,7 @@ function FilterBtn({ title, state, setState }) {
     );
 }
 
-export default function GeoEnrichedMap({ portalItemId, onMainPinChange, mapContainerRef }) {
+export default function GeoEnrichedMap({ portalItemId, onMainPinChange }) {
     const viewDiv = useRef(null);
     const [selectedAttrs, setSelectedAttrs] = useState(null);
     const [featureLayers, setFeatureLayers] = useState([]);
@@ -70,9 +68,6 @@ export default function GeoEnrichedMap({ portalItemId, onMainPinChange, mapConta
     const viewRef = useRef(null);
     const markerLayerRef = useRef(null);
     const highlightLayerRef = useRef(null);
-
-    // initialize the map into mapContainerRef
-    useArcGISMap(mapContainerRef, portalItemId, onMainPinChange);
 
     const keyMap = {
         "thematic_value2": "2025 Median Household Income",
@@ -173,7 +168,7 @@ export default function GeoEnrichedMap({ portalItemId, onMainPinChange, mapConta
 
 
             view = new MapView({
-                container: mapContainerRef.current,
+                container: viewDiv.current,
                 map,
                 center: [-117.173, 34.0397],
                 zoom: 12
@@ -443,7 +438,7 @@ export default function GeoEnrichedMap({ portalItemId, onMainPinChange, mapConta
 
                 {/* Map */}
                 <div
-                    ref={mapContainerRef}
+                    ref={viewDiv}
                     className="flex-1 bg-neutral-100 rounded-[20px] overflow-hidden"
                 />
             </div>

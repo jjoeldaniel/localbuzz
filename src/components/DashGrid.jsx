@@ -1,5 +1,6 @@
 // src/components/Dashboard.jsx
 import { h } from 'preact';
+import { useRef } from 'preact/hooks';
 
 import { useArcGISMap } from './useArcMap';
 
@@ -16,6 +17,24 @@ export default function DashGrid({ mapContainerRef, selectedPoint, onMapClick, p
     useArcGISMap(mapContainerRef, portalItemId, onMainPinChange);
 
 
+    // record where pointer started
+    const startPoint = useRef({ x: 0, y: 0 });
+
+    const handlePointerDown = e => {
+        startPoint.current = { x: e.clientX, y: e.clientY };
+    };
+
+    const handlePointerUp = e => {
+        const dx = e.clientX - startPoint.current.x;
+        const dy = e.clientY - startPoint.current.y;
+        const dist = Math.hypot(dx, dy);
+        // threshold of 5px—if smaller, it was a “click”
+        if (dist < 5) {
+            onMapClick();
+        }
+    };
+
+
     return (
         <div className="w-full h-full p-6 flex flex-col space-y-6">
             {/* Header */}
@@ -29,7 +48,11 @@ export default function DashGrid({ mapContainerRef, selectedPoint, onMapClick, p
             <div className="grid grid-cols-4 grid-rows-2 gap-4 auto-rows-min">
                 {/* 1) Households */}
                 <div className="rounded-[10px] border-2 border-neutral-300 bg-white p-4 flex flex-col items-start">
-                    <div className="bg-amber-500 rounded-[10px] w-24 h-24 mb-2" />
+                    <img
+                        src="/house.svg"
+                        alt="Households icon"
+                        className="w-24 h-24 mb-2"
+                    />
                     <div className="text-lg font-['Nexa'] font-black">140</div>
                     <div className="text-sm font-['Nexa'] font-light">Households</div>
                     <div className="mt-1 text-sm text-[10px] font-['Nexa'] font-light">
@@ -40,7 +63,11 @@ export default function DashGrid({ mapContainerRef, selectedPoint, onMapClick, p
 
                 {/* 2) Median Age */}
                 <div className="rounded-[10px] border-2 border-neutral-300 bg-white p-4 flex flex-col items-start">
-                    <div className="bg-amber-500 rounded-[10px] w-24 h-24 mb-2" />
+                    <img
+                        src="/person.svg"
+                        alt="Households icon"
+                        className="w-24 h-24 mb-2"
+                    />
                     <div className="text-lg font-['Nexa'] font-black">44.8</div>
                     <div className="text-sm font-['Nexa'] font-light">Median Age</div>
                     <div className="mt-1 text-sm text-[10px] font-['Nexa'] font-light">
@@ -51,7 +78,11 @@ export default function DashGrid({ mapContainerRef, selectedPoint, onMapClick, p
 
                 {/* 3) Median HH Income */}
                 <div className="rounded-[10px] border-2 border-neutral-300 bg-white p-4 flex flex-col items-start">
-                    <div className="bg-amber-500 rounded-[10px] w-24 h-24 mb-2" />
+                    <img
+                        src="/dollar.svg"
+                        alt="Households icon"
+                        className="w-24 h-24 mb-2"
+                    />
                     <div className="text-lg font-['Nexa'] font-black">{selectedPoint != null ? dollarFormatter.format(JSON.parse(selectedPoint)?.hexagon?.graphic?.attributes?.thematic_value2) : " No Point"}</div>
                     <div className="text-sm font-['Nexa'] font-light">Median Household Income</div>
                     <div className="mt-1 text-sm text-[10px] font-['Nexa'] font-light">
@@ -95,7 +126,11 @@ export default function DashGrid({ mapContainerRef, selectedPoint, onMapClick, p
                 </div>
 
                 {/* 5) Map (sps 2 columns) */}
-                <div className="col-span-2 rounded-[10px] border-2 border-neutral-300 bg-white overflow-hidden" onClick={onMapClick}>
+                <div
+                    className="col-span-2 rounded-[10px] border-2 border-neutral-300 bg-white overflow-hidden"
+                    onPointerDown={handlePointerDown}
+                    onPointerUp={handlePointerUp}
+                >
                     <div ref={mapContainerRef} className="w-full h-full" />
                 </div>
 
