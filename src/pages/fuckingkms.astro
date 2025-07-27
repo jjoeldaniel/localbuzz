@@ -1,0 +1,11 @@
+---
+// src/pages/dashboard.astro
+import Layout from "../layouts/Layout.astro"
+import Dashboard from "../components/Dashboard.jsx"
+---
+
+<Layout>
+    <div class="w-full" style="height: calc(100vh);">
+        <Dashboard client:load />
+    </div>
+</Layout>

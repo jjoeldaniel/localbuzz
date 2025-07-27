@@ -10,7 +10,41 @@ const FILTER_STATES = {
     ASC: 1,
     DESC: 2
 };
-const LABELS = ['No filter', 'Low → High', 'High → Low'];
+const LABELS = ['None', 'Low - High', 'High - Low'];
+
+// 1. Dropdown filter styled per Figma
+function DropdownFilter({ state, setState }) {
+    const [open, setOpen] = useState(false);
+    const toggle = () => setOpen(o => !o);
+    const onSelect = idx => { setState(idx); setOpen(false); };
+
+    return (
+        <div className="relative w-52 mb-2">
+            <div className="relative w-full h-11 cursor-pointer" onClick={toggle}>
+                <div className="absolute inset-0 rounded-[5px] border-2 border-neutral-300 flex items-center px-4">
+                    <span className="text-sm font-normal font-black font-['Nexa']">
+                        {LABELS[state]}
+                    </span>
+                </div>
+            </div>
+            {open && (
+                <div className="absolute mt-1 w-full bg-white rounded-[5px] shadow-lg z-10 overflow-hidden">
+                    {LABELS.map((opt, idx) => (
+                        <button
+                            key={idx}
+                            className={`w-full h-11 flex items-center px-4 text-sm font-black font-['Nexa'] ${state === idx ? 'bg-amber-500 text-white' : 'text-black font-normal'
+                                }`}
+                            onClick={() => onSelect(idx)}
+                            style="cursor: pointer;"
+                        >
+                            {opt}
+                        </button>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+}
 
 // 2. Reusable button component
 function FilterBtn({ title, state, setState }) {
@@ -51,23 +85,20 @@ export default function GeoEnrichedMap({ portalItemId, onMainPinChange }) {
     const flagPath = "M4 15C4 15 5 14 8 14C11 14 13 16 16 16C19 16 20 15 20 15V3C20 3 19 4 16 4C13 4 11 2 8 2C5 2 4 3 4 3L4 22";
     const pinPath = "M12 22C13 17 20 16.4183 20 10C20 5.58172 16.4183 2 12 2C7.58172 2 4 5.58172 4 10C4 16.4183 11 17 12 22Z M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z"
 
+    // 3. Numeric sort/filter state
     const [incomeFilter, setIncomeFilter] = useState(FILTER_STATES.NONE);
     const [ageFilter, setAgeFilter] = useState(FILTER_STATES.NONE);
     const [mainPinId, setMainPinId] = useState(null);
 
-    // 4. Compute sortedfiltered list before rendering
+    // 4. Compute sorted/filtered list before rendering
     const displayedPoints = useMemo(() => {
         const arr = [...points];
-
         arr.sort((a, b) => {
-            // 1️⃣ Push missing hexagons to the end
             const aHas = !!a.hexagon;
             const bHas = !!b.hexagon;
             if (!aHas && bHas) return 1;
             if (aHas && !bHas) return -1;
-            if (!aHas && !bHas) return 0;
 
-            // 2️⃣ Income primary
             const ai = a.hexagon.graphic.attributes.thematic_value2 || 0;
             const bi = b.hexagon.graphic.attributes.thematic_value2 || 0;
             const incomeDiff =
@@ -76,7 +107,6 @@ export default function GeoEnrichedMap({ portalItemId, onMainPinChange }) {
                         : 0;
             if (incomeDiff !== 0) return incomeDiff;
 
-            // 3️⃣ Age secondary
             const aa = a.hexagon.graphic.attributes.thematic_value3 || 0;
             const ba = b.hexagon.graphic.attributes.thematic_value3 || 0;
             const ageDiff =
@@ -85,8 +115,6 @@ export default function GeoEnrichedMap({ portalItemId, onMainPinChange }) {
                         : 0;
             return ageDiff;
         });
-
-        // 4️⃣ Only show top 10
         return arr.slice(0, 10);
     }, [points, incomeFilter, ageFilter]);
 
@@ -164,16 +192,16 @@ export default function GeoEnrichedMap({ portalItemId, onMainPinChange }) {
                 })
             );
 
-            const serviceUrlEnv = "https://services6.arcgis.com/lY62PNsqcliFwZwn/arcgis/rest/services/kfrankland_GlobalOps__d416fb3b94534208/FeatureServer";
+            // const serviceUrlEnv = "https://services6.arcgis.com/lY62PNsqcliFwZwn/arcgis/rest/services/kfrankland_GlobalOps__d416fb3b94534208/FeatureServer";
 
-            const envData = new FeatureLayer({
-                url: `${serviceUrlEnv}/${3}`,
-                outFields: ['*'],       // return all fields
-                popupEnabled: false,     // we’ll render our own sidebar
-                minScale: 0,   // no zoom‑out limit
-                maxScale: 0,
-            })
-            featureLayers.push(envData);
+            // const envData = new FeatureLayer({
+            //     url: `${serviceUrlEnv}/${3}`,
+            //     outFields: ['*'],       // return all fields
+            //     popupEnabled: false,     // we’ll render our own sidebar
+            //     minScale: 0,   // no zoom‑out limit
+            //     maxScale: 0,
+            // })
+            // featureLayers.push(envData);
 
 
             // 4. optionally group them in one entry
@@ -207,8 +235,8 @@ export default function GeoEnrichedMap({ portalItemId, onMainPinChange }) {
             // click handler against your FeatureLayer array
             view.on('click', async evt => {
 
-                const pinSymbol = new SimpleMarkerSymbol({ style: 'path', size: '20px', color: '#4cb944', outline: { width: 1 }, path: pinPath, xoffset: 0, yoffset: 8 });
-                const flagSymbol = new SimpleMarkerSymbol({ style: 'path', size: '20px', color: '#ec9e00', outline: { width: 1 }, path: flagPath, xoffset: 6, yoffset: 7 });
+                const pinSymbol = new SimpleMarkerSymbol({ style: 'path', size: '20px', color: '#ec9e00', outline: { width: 1 }, path: pinPath, xoffset: 0, yoffset: 8 });
+                const flagSymbol = new SimpleMarkerSymbol({ style: 'path', size: '20px', color: '#edae2f', outline: { width: 1 }, path: flagPath, xoffset: 6, yoffset: 7 });
 
 
                 // hit on the hexagons
@@ -336,66 +364,85 @@ export default function GeoEnrichedMap({ portalItemId, onMainPinChange }) {
         view.goTo({ target: g.geometry, zoom: Math.max(view.zoom, 14) });
     }
 
-    // 4. render sidebar  map
+    // 4. render sidebar + searchbar + map stacked
     return (
-        <div style={{ display: 'flex', height: '100%' }}>
-            <aside
-                style={{
-                    width: 280,
-                    padding: '1rem',
-                    borderRight: '1px solid #ddd',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: '100%',
-                    minHeight: 0             // ← allow the flex container to shrink
-                }}
-            >
-                <div
-                    style={{
-                        flex: 1,
-                        overflowY: 'auto',
-                        minHeight: 0           // ← allow this child to actually scroll
-                    }}
-                >
-                    {points.length === 0 ? (
-                        <p>Click on the map to add a marker.</p>
-                    ) : (
-                        <>
-                            <h2>Points</h2>
-                            <div style={{ marginBottom: '1rem' }}>
-                                <h6>Filter by:</h6>
-                                <span>
-                                    <FilterBtn title="Income" state={incomeFilter} setState={setIncomeFilter} />
-                                </span>
-                                <span>
-                                    <FilterBtn title="Age" state={ageFilter} setState={setAgeFilter} />
-                                </span>
-                            </div>
-                            <button onClick={handleClearPoints}>Clear Points</button>
-                            <ul>
-                                {displayedPoints.map(p => (
+        <div className="w-full h-full flex">
+            {/* — Full‑height Sidebar */}
+            <aside className="w-72 h-full bg-neutral-100 rounded-[20px] p-4">
+
+                <h2 className="text-2xl font-['Nexa'] mb-4">Points</h2>
+                {points.length === 0 ? (
+                    <p>Click on the map to <br></br> add a marker.</p>
+                ) : (
+                    <>
+                        <div className="text-lg font-normal font-['Nexa'] text-black mb-2">Filter points by:</div>
+                        <div className="text-base font-black font-['Nexa'] text-black ">Income:</div>
+                        <DropdownFilter state={incomeFilter} setState={setIncomeFilter} />
+                        <div className="text-base font-black font-['Nexa'] text-black">Age:</div>
+                        <DropdownFilter state={ageFilter} setState={setAgeFilter} />
+                        <button
+                            onClick={handleClearPoints}
+                            className="w-full px-3 py-1 rounded-[10px] border-2 border-neutral-300 text-base font-['Nexa']" style="cursor: pointer;"
+                        >Clear Points</button>
+                        <ul className="space-y-2 mt-4 h-70 overflow-y-scroll">
+                            {displayedPoints.map(p => {
+                                const isSelected = p.val === 1;
+                                const incomeValue = p.hexagon?.graphic?.attributes?.thematic_value2 != null
+                                    ? dollarFormatter.format(p.hexagon.graphic.attributes.thematic_value2)
+                                    : 'No $';
+
+                                return (
                                     <li
                                         key={p.id}
-                                        style={{ marginBottom: '0.5rem', cursor: 'pointer' }}
                                         onClick={() => handlePointClick(p)}
+                                        className={`flex flex-col px-4 py-2 mb-2 rounded font-['Nexa'] ${isSelected ? ' text-white' : 'bg-white'
+                                            }`}
+                                        style={`${isSelected ? 'background-color: #ec9e00;' : ""} cursor: pointer;`}
                                     >
-                                        {p.latitude}, {p.longitude} —&nbsp;
-                                        Median Household Income {p.hexagon?.graphic?.attributes?.thematic_value2 != null
-                                            ? dollarFormatter.format(p.hexagon.graphic.attributes.thematic_value2)
-                                            : 'No $'
-                                        }
+                                        {/* Top line: Income */}
+                                        <div className="text-sm font-bold">
+                                            <span className="text-sm font-normal">{keyMap["thematic_value2"]}</span>: {incomeValue}
+                                        </div>
+                                        {/* Bottom line: Location */}
+                                        <div className="text-xs mt-1">
+                                            Location: {p.latitude}, {p.longitude}
+                                        </div>
                                     </li>
-                                ))}
-                            </ul>
-                        </>
-                    )}
+                                );
+                            })}
+                        </ul>
 
-                </div>
+                    </>
+                )}
             </aside>
-            <div
-                ref={viewDiv}
-                style={{ flexGrow: 1, height: '100%' }}
-            />
+
+            {/* — Right column: Search Bar on top, Map below */}
+            <div className="flex-1 flex flex-col h-full pl-4 space-y-4">
+                {/* Search Bar */}
+                <div className="bg-neutral-100 rounded-[10px] p-4 flex items-center">
+                    <input
+                        type="text"
+                        placeholder="Search"
+                        className="flex-1 px-4 py-2 text-2xl font-['Nexa'] border-2 border-neutral-300 rounded-[10px]"
+                    />
+                    <button className="ml-2 px-4 py-2 text-xl rounded-[10px] border-2 border-neutral-300">
+                        Alerts
+                    </button>
+                    <button className="ml-2 px-4 py-2 text-xl rounded-[10px] border-2 border-neutral-300">
+                        Inbox
+                    </button>
+                    <button className="ml-2 px-4 py-2 text-xl rounded-[10px] border-2 border-neutral-300">
+                        Profile
+                    </button>
+                </div>
+
+                {/* Map */}
+                <div
+                    ref={viewDiv}
+                    className="flex-1 bg-neutral-100 rounded-[20px] overflow-hidden"
+                />
+            </div>
         </div>
     );
+
 }
