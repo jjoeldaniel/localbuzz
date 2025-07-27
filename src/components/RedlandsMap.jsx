@@ -30,6 +30,9 @@ export default function RedlandsMap({ featureLayerUrl, selectedCategory = 'all',
         const { default: Search } = await import('@arcgis/core/widgets/Search');
         const { default: Graphic } = await import('@arcgis/core/Graphic');
 
+        const { default: SimpleRenderer } = await import('@arcgis/core/renderers/SimpleRenderer');
+        const { default: SimpleMarkerSymbol } = await import('@arcgis/core/symbols/SimpleMarkerSymbol');
+
         console.log("Loading network analysis modules...");
         const networkServiceModule = await import('@arcgis/core/rest/networkService');
         const serviceAreaModule = await import('@arcgis/core/rest/serviceArea');
@@ -62,6 +65,17 @@ export default function RedlandsMap({ featureLayerUrl, selectedCategory = 'all',
         // Service Area REST endpoint
         const serviceAreaUrl = 'https://route-api.arcgis.com/arcgis/rest/services/World/ServiceAreas/NAServer/ServiceArea_World';
 
+        const pointRenderer = new SimpleRenderer({
+          symbol: new SimpleMarkerSymbol({
+            size: '12px', // Increase the size here
+            color: '#D1342F', // A nice red color
+            outline: {
+              color: 'white',
+              width: 1,
+            },
+          }),
+        });
+
         // Create the map and view
         const map = new Map({ basemap: 'streets-vector' });
         if (featureLayerUrl) {
@@ -81,6 +95,7 @@ export default function RedlandsMap({ featureLayerUrl, selectedCategory = 'all',
           featureLayer = new FeatureLayer({
             url: featureLayerUrl,
             popupTemplate,
+            renderer: pointRenderer, // Apply the renderer here
             outFields: ['*'],
             title: 'Redlands Features'
           });
@@ -157,8 +172,8 @@ export default function RedlandsMap({ featureLayerUrl, selectedCategory = 'all',
             geometry,
             symbol: {
               type: 'simple-marker',
-              color: 'red',
-              size: 8,
+              color: 'blue',
+              size: 16,
               style: 'diamond',
             }
           });
