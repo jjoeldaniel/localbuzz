@@ -1,81 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
-import RedlandsMap from "../components/RedlandsMap";
-import logo_bee from "../images/logo_bee.svg";
+import MapRoute from "../components/MapRoute";
+
+const furl = "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/FinalBusinessFeature/FeatureServer";
 ---
 
 <Layout>
-    <div class="w-[1920px] h-[1080px] relative bg-white overflow-hidden">
-        <div class="w-[1266px] h-36 left-[488px] top-[100px] absolute bg-neutral-100 rounded-[10px]"></div>
-        <div class="w-[1266px] h-[753px] left-[496px] top-[263px] absolute bg-neutral-100 rounded-[20px]">
-            <RedlandsMap
-                client:load
-                featureLayerUrl={"https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/FinalBusinessFeature/FeatureServer"}
-            />
-        </div>
-        <div class="w-96 h-[911px] left-[80px] top-[100px] absolute bg-neutral-100 rounded-[20px]"></div>
-        <div class="w-[715px] h-16 left-[520px] top-[135px] absolute rounded-[10px] border-2 border-neutral-300"></div>
-        <div class="w-12 h-12 left-[1172px] top-[144px] absolute bg-buzz rounded-[10px]"></div>
-        <div
-            class="w-44 h-9 left-[544px] top-[146px] absolute justify-start text-black text-3xl font-normal font-['Nexa']"
-        >
-            Search Bar
-        </div>
-        <div class="w-24 h-12 left-[154px] top-[643px] absolute rounded-[5px] border border-neutral-300"></div>
-        <div
-            class="w-20 h-14 left-[166px] top-[642px] absolute justify-start text-black text-3xl font-normal font-['Nexa'] leading-[54px]"
-        >
-            Craft
-        </div>
-        <div class="w-20 h-12 left-[154px] top-[724px] absolute rounded-[5px] border border-neutral-300"></div>
-        <div
-            class="w-14 h-14 left-[170px] top-[721px] absolute justify-start text-black text-3xl font-normal font-['Nexa'] leading-[54px]"
-        >
-            All
-        </div>
-        <div class="w-36 h-12 left-[154px] top-[549px] absolute rounded-[5px] border border-neutral-300"></div>
-        <div
-            class="w-28 h-12 left-[170px] top-[548px] absolute justify-start text-black text-3xl font-normal font-['Nexa'] leading-[54px]"
-        >
-            Sweets
-        </div>
-        <div class="w-44 h-12 left-[154px] top-[360px] absolute rounded-[5px] border border-neutral-300"></div>
-        <div
-            class="w-40 h-14 left-[163px] top-[359px] absolute justify-start text-black text-3xl font-normal font-['Nexa'] leading-[54px]"
-        >
-            Beverages
-        </div>
-        <div class="w-32 h-12 left-[154px] top-[263px] absolute bg-buzz rounded-[5px]"></div>
-        <div
-            class="w-24 h-14 left-[163px] top-[263px] absolute justify-start text-white text-3xl font-normal font-['Nexa'] leading-[54px]"
-        >
-            Bakery
-        </div>
-        <div class="w-28 h-12 left-[154px] top-[456px] absolute rounded-[5px] border border-neutral-300"></div>
-        <div
-            class="w-24 h-12 left-[166px] top-[455px] absolute justify-start text-black text-3xl font-normal font-['Nexa'] leading-[54px]"
-        >
-            Floral
-        </div>
-        <img class="w-24 h-28 left-[132px] top-[110px] absolute" src="https://placehold.co/98x106" />
-        <div class="w-40 h-16 left-[1455px] top-[135px] absolute rounded-[10px] border-2 border-neutral-300"></div>
-        <div
-            class="w-32 h-9 left-[1472px] top-[146px] absolute justify-start text-black text-3xl font-light font-['Nexa']"
-        >
-            Walking
-        </div>
-        <div class="w-24 h-16 left-[1631px] top-[135px] absolute rounded-[10px] border-2 border-neutral-300"></div>
-        <div
-            class="w-20 h-9 left-[1642px] top-[146px] absolute justify-start text-black text-3xl font-light font-['Nexa']"
-        >
-            None
-        </div>
-        <div class="w-44 h-16 left-[1264px] top-[135px] absolute rounded-[10px] border-2 border-neutral-300"></div>
-        <div
-            class="w-28 h-9 left-[1295px] top-[146px] absolute justify-start text-black text-3xl font-light font-['Nexa']"
-        >
-            Driving
-        </div><Image class="w-24 h-28 left-[132px] top-[110px] absolute" src={logo_bee} alt="Bee logo" />
-    </div>
+  <MapRoute client:load featureLayerUrl={furl} />
 </Layout>
