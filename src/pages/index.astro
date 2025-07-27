@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import logo from "../images/logo.svg";
 import logo_bee from "../images/logo_bee.svg";
 import search_icon from "../images/search_icon.svg";
+import composite from "../images/composite.png";
 import Search from "../components/Search.astro";
 import "../styles/global.css";
 ---
@@ -24,7 +25,9 @@ import "../styles/global.css";
         >
             See what the buzz is about!
         </div>
-        <div class="w-[859px] h-[663px] left-[904px] top-[312px] absolute bg-black rounded-[10px]"></div>
+        <div class="w-[859px] h-[663px] left-[904px] top-[312px] absolute">
+            <Image src={composite} alt="Honeycomb art" class="rounded-[10px]" />
+        </div>
         <div
             class="w-24 h-9 left-[1067px] top-[114px] absolute justify-start text-black text-3xl font-light font-['Nexa']"
         >
@@ -49,7 +52,6 @@ import "../styles/global.css";
         <div
             class="w-80 h-9 left-[1236px] top-[605px] absolute justify-start text-white text-3xl font-light font-['Nexa']"
         >
-            Photoshop Composite
         </div>
 
         <div id="login_button" class="transition delay-150 duration-300 ease-in-out hover:-translate-y-1">
