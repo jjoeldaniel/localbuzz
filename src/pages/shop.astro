@@ -1,0 +1,209 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import logo from "../images/logo.svg";
+import logo_bee from "../images/logo_bee.svg";
+import search_icon from "../images/search_icon.svg";
+import Search from "../components/Search.astro";
+import "../styles/global.css";
+---
+
+<Layout>
+    <div class="w-[1920px] h-[1080px] relative bg-white overflow-hidden">
+        <div class="w-[691px] h-14 left-[144px] top-[447px] absolute overflow-scroll scrollbar-hidden">
+            <div class="w-24 h-12 left-[672px] top-[1px] absolute rounded-[5px] border border-neutral-300"></div>
+            <div class="w-24 h-12 left-[566px] top-[1px] absolute rounded-[5px] border border-neutral-300"></div>
+            <div class="w-36 h-12 left-[421px] top-[1px] absolute rounded-[5px] border border-neutral-300"></div>
+            <div class="w-44 h-12 left-[127px] top-[1px] absolute rounded-[5px] border border-neutral-300"></div>
+            <div class="w-28 h-12 left-[304px] top-[1px] absolute rounded-[5px] border border-neutral-300"></div>
+            <div
+                class="w-20 h-14 left-[684px] top-0 absolute justify-start text-black text-3xl font-normal font-['Nexa'] leading-[54px]"
+            >
+                Craft
+            </div>
+            <div
+                class="w-44 h-14 left-[576px] top-0 absolute justify-start text-black text-3xl font-normal font-['Nexa'] leading-[54px]"
+            >
+                Food
+            </div>
+            <div
+                class="w-28 h-12 left-[437px] top-0 absolute justify-start text-black text-3xl font-normal font-['Nexa'] leading-[54px]"
+            >
+                Sweets
+            </div>
+            <div
+                class="w-40 h-14 left-[136px] top-0 absolute justify-start text-black text-3xl font-normal font-['Nexa'] leading-[54px]"
+            >
+                Beverages
+            </div>
+            <div class="w-32 h-12 left-0 top-[1px] absolute rounded-[5px] border border-neutral-300"></div>
+            <div
+                class="w-24 h-14 left-[9px] top-[1px] absolute justify-start text-black text-3xl font-normal font-['Nexa'] leading-[54px]"
+            >
+                Bakery
+            </div>
+            <div
+                class="w-24 h-12 left-[316px] top-0 absolute justify-start text-black text-3xl font-normal font-['Nexa'] leading-[54px]"
+            >
+                Floral
+            </div>
+        </div>
+        <div class="w-[572px] h-96 left-[141px] top-[544px] absolute  overflow-scroll scrollbar-hidden">
+            <div class="w-[515px] h-10 left-0 top-[278px] absolute justify-start">
+                <span class="text-black text-base font-black font-['Nexa']">$$</span><span
+                    class="text-neutral-300 text-base font-black font-['Nexa']">$$$</span
+                ><span class="text-black text-base font-black font-['Nexa']"> | Redlands, CA 92373</span>
+            </div>
+            <div
+                class="w-[455px] h-10 left-0 top-[167px] absolute justify-start text-amber-500 text-4xl font-black font-['Nexa']"
+            >
+                Cedar Ave Blooms
+            </div>
+            <div
+                class="w-96 left-0 top-[218px] absolute justify-start text-black text-xl font-light font-['Nexa'] leading-normal"
+            >
+                Brings beauty to every moment with thoughtfully curated floral designs.
+            </div>
+            <div class="w-[515px] h-10 left-0 top-[112px] absolute justify-start">
+                <span class="text-black text-base font-black font-['Nexa']">$$</span><span
+                    class="text-neutral-300 text-base font-black font-['Nexa']">$$$</span
+                ><span class="text-black text-base font-black font-['Nexa']"> | Redlands, CA 92373</span>
+            </div>
+            <div
+                class="w-[474px] h-10 left-0 top-0 absolute justify-start text-amber-500 text-4xl font-black font-['Nexa']"
+            >
+                Blaylock Brittle Co
+            </div>
+            <div
+                class="w-96 h-14 left-0 top-[51px] absolute justify-start text-black text-xl font-light font-['Nexa'] leading-normal"
+            >
+                Delicious brittle that is sure   to satisfy your cravings.
+            </div>
+            <div class="w-[515px] h-10 left-0 top-[438px] absolute justify-start">
+                <span class="text-black text-base font-black font-['Nexa']">$$$</span><span
+                    class="text-neutral-300 text-base font-black font-['Nexa']">$</span
+                ><span class="text-zinc-300 text-base font-black font-['Nexa']">$</span><span
+                    class="text-black text-base font-black font-['Nexa']"
+                >
+                    | Redlands, CA 92373</span
+                >
+            </div>
+            <div
+                class="w-[515px] h-10 left-0 top-[333px] absolute justify-start text-amber-500 text-4xl font-black font-['Nexa']"
+            >
+                Citrus Blossom Bakery LLC
+            </div>
+            <div
+                class="w-96 h-14 left-0 top-[384px] absolute justify-start text-black text-xl font-light font-['Nexa'] leading-normal"
+            >
+                Offering buttercream wedding cakes and curated dessert tables.
+            </div>
+            <div
+                class="w-[770.50px] h-0 left-0 top-[165px] absolute outline outline-1 outline-offset-[-0.50px] outline-neutral-300"
+            >
+            </div>
+            <div
+                class="w-[770.50px] h-0 left-0 top-[326px] absolute outline outline-1 outline-offset-[-0.50px] outline-neutral-300"
+            >
+            </div>
+            <div
+                class="w-[770.50px] h-0 left-0 top-[479px] absolute outline outline-1 outline-offset-[-0.50px] outline-neutral-300"
+            >
+            </div>
+            <div
+                class="w-[770.50px] h-0 left-0 top-[641px] absolute outline outline-1 outline-offset-[-0.50px] outline-neutral-300"
+            >
+            </div>
+            <div
+                class="w-[770.50px] h-0 left-0 top-[783px] absolute outline outline-1 outline-offset-[-0.50px] outline-neutral-300"
+            >
+            </div>
+            <div class="w-[515px] h-10 left-0 top-[606px] absolute justify-start">
+                <span class="text-black text-base font-black font-['Nexa']">$</span><span
+                    class="text-neutral-300 text-base font-black font-['Nexa']">$$$$</span
+                ><span class="text-black text-base font-black font-['Nexa']"> | Redlands, CA 92373</span>
+            </div>
+            <div
+                class="w-[455px] h-10 left-0 top-[492px] absolute justify-start text-amber-500 text-4xl font-black font-['Nexa']"
+            >
+                Cleopatra Pastarrie
+            </div>
+            <div
+                class="w-96 h-14 left-0 top-[543px] absolute justify-start text-black text-xl font-light font-['Nexa'] leading-normal"
+            >
+                Delicious Macarons with multiple flavors in each bite!
+            </div>
+            <div class="w-[515px] h-10 left-0 top-[742px] absolute justify-start">
+                <span class="text-black text-base font-extrabold font-['Nexa']">$$</span><span
+                    class="text-neutral-300 text-base font-extrabold font-['Nexa']">$$$</span
+                ><span class="text-black text-base font-extrabold font-['Nexa']"> | Redlands, CA 92373</span>
+            </div>
+            <div
+                class="w-[455px] h-10 left-0 top-[654px] absolute justify-start text-amber-500 text-4xl font-black font-['Nexa']"
+            >
+                Dan’s Doughs
+            </div>
+            <div class="w-96 h-8 left-0 top-[705px] absolute justify-start text-black text-xl font-light font-['Nexa']">
+                Bagels, boules, cookies, and more!
+            </div>
+            <div class="w-[515px] h-10 left-0 top-[909px] absolute justify-start">
+                <span class="text-black text-base font-black font-['Nexa']">$$</span><span
+                    class="text-neutral-300 text-base font-black font-['Nexa']">$$$</span
+                ><span class="text-black text-base font-black font-['Nexa']"> | Redlands, CA 92373</span>
+            </div>
+            <div
+                class="w-[559px] h-10 left-0 top-[797px] absolute justify-start text-amber-500 text-4xl font-black font-['Nexa']"
+            >
+                Freeze Dried Fairy
+            </div>
+            <div
+                class="w-[476px] h-14 left-0 top-[848px] absolute justify-start text-black text-xl font-light font-['Nexa'] leading-normal"
+            >
+                Freeze Dried Fairy takes your favorite candies and gives them a magical, crunchy twist.
+            </div>
+        </div>
+
+        <div class="w-[859px] h-[663px] left-[904px] top-[312px] absolute bg-black rounded-[10px]"></div>
+        <div
+            class="w-24 h-9 left-[1067px] top-[114px] absolute justify-start text-black text-3xl font-light font-['Nexa']"
+        >
+      <a href="/shop">Shop</a>
+        </div>
+        <div
+            class="w-12 h-9 left-[1275px] top-[114px] absolute justify-start text-black text-3xl font-light font-['Nexa']"
+        >
+            Sell
+        </div>
+        <div
+            class="w-24 h-9 left-[1438px] top-[114px] absolute justify-start text-black text-3xl font-light font-['Nexa']"
+        >
+            Events
+        </div>
+        <div class="w-40 h-12 left-[1598px] top-[110px] absolute bg-buzz rounded-[5px]"></div>
+        <div
+            class="w-36 h-11 pr-2 left-[1609px] top-[114px] absolute text-center justify-start text-white text-3xl font-bold font-['Nexa']"
+        >
+            Get App
+        </div>
+
+        <div class="w-[723px] h-24 left-[114px] top-[312px] absolute rounded-[10px] border-2 border-neutral-300"></div>
+        <div
+            class="w-[470.04px] h-9 left-[142.10px] top-[340px] absolute justify-start text-black text-3xl font-light font-['Nexa']"
+        >
+            <Search items={["McDonald's", "Jack in the Box", "In n Out"]} />
+        </div>
+        <Image
+            alt="Magnifying glass"
+            src={search_icon}
+            class="w-18 h-18 left-[755px] top-[322px] absolute rounded-[10px] scale-50"
+        />
+        <a href="/"><Image alt="LocalBuzz logo" class="w-96 h-32 left-[201px] top-[82px] absolute" src={logo} /></a>
+        <a href="/"
+            ><Image
+                alt="LocalBuzz Bee"
+                class="w-28 h-32 left-[96px] top-[79px] absolute transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
+                src={logo_bee}
+            /></a
+        >
+    </div>
+</Layout>

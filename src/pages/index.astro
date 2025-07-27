@@ -1,8 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import TestMap from "../components/GeoMap.jsx";
 import { Image } from "astro:assets";
 import logo from "../images/logo.svg";
+import logo_bee from "../images/logo_bee.svg";
+import search_icon from "../images/search_icon.svg";
 import Search from "../components/Search.astro";
 import "../styles/global.css";
 ---
@@ -27,7 +28,7 @@ import "../styles/global.css";
         <div
             class="w-24 h-9 left-[1067px] top-[114px] absolute justify-start text-black text-3xl font-light font-['Nexa']"
         >
-            About
+      <a href="/shop">Shop</a>
         </div>
         <div
             class="w-12 h-9 left-[1275px] top-[114px] absolute justify-start text-black text-3xl font-light font-['Nexa']"
@@ -42,7 +43,7 @@ import "../styles/global.css";
         <div class="w-40 h-12 left-[1598px] top-[110px] absolute bg-buzz rounded-[5px]"></div>
         <div
             class="w-36 h-11 pr-2 left-[1609px] top-[114px] absolute text-center justify-start text-white text-3xl font-bold font-['Nexa']"
-              >
+        >
             Get App
         </div>
         <div
@@ -50,18 +51,25 @@ import "../styles/global.css";
         >
             Photoshop Composite
         </div>
-        <div class="w-[338px] h-16 left-[310px] top-[792px] absolute bg-buzz rounded-[5px]"></div>
-        <div class="w-40 h-16 left-[125px] top-[792px] absolute bg-buzz rounded-[5px]"></div>
-        <div
-            class="w-100 h-14 place-content-center left-[335px] top-[798px] absolute justify-start text-white text-3xl font-black font-['Nexa']"
-        >
-            CREATE ACCOUNT
+
+        <div id="login_button" class="transition delay-150 duration-300 ease-in-out hover:-translate-y-1">
+            <div class="w-40 h-16 left-[125px] top-[792px] absolute bg-buzz rounded-[5px]"></div>
+            <div
+                class="w-36 h-14 pt-2 left-[150px] top-[798px] absolute justify-start text-white text-3xl font-black font-['Nexa']"
+            >
+                LOG IN
+            </div>
         </div>
-        <div
-            class="w-36 h-14 pt-2 left-[150px] top-[798px] absolute justify-start text-white text-3xl font-black font-['Nexa']"
-        >
-            LOG IN
+
+        <div id="signup_bottom" class="transition delay-150 duration-300 ease-in-out hover:-translate-y-1">
+            <div class="w-[338px] h-16 left-[310px] top-[792px] absolute bg-buzz rounded-[5px]"></div>
+            <div
+                class="w-100 h-14 place-content-center left-[335px] top-[798px] absolute justify-start text-white text-3xl font-black font-['Nexa']"
+            >
+                CREATE ACCOUNT
+            </div>
         </div>
+
         <div
             class="w-80 h-7 left-[114px] top-[945px] absolute justify-start text-black text-xl font-black font-['Nexa'] italic"
         >
@@ -73,7 +81,18 @@ import "../styles/global.css";
         >
             <Search items={["McDonald's", "Jack in the Box", "In n Out"]} />
         </div>
-        <div class="w-18 h-20 left-[755px] top-[322px] absolute bg-buzz rounded-[10px]"></div>
-        <Image src={logo} alt="LocalBuzz Logo" class="w-[518px] h-32 left-[97px] top-[79px] absolute" />
+        <Image
+            alt="Magnifying glass"
+            src={search_icon}
+            class="w-18 h-18 left-[755px] top-[322px] absolute rounded-[10px] scale-50"
+        />
+        <a href="/"><Image alt="LocalBuzz logo" class="w-96 h-32 left-[201px] top-[82px] absolute" src={logo} /></a>
+        <a href="/"
+            ><Image
+                alt="LocalBuzz Bee"
+                class="w-28 h-32 left-[96px] top-[79px] absolute transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
+                src={logo_bee}
+            /></a
+        >
     </div>
 </Layout>
