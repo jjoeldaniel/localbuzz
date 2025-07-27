@@ -25,7 +25,7 @@ function FilterBtn({ title, state, setState }) {
     );
 }
 
-export default function GeoEnrichedMap({ portalItemId }) {
+export default function GeoEnrichedMap({ portalItemId, onMainPinChange }) {
     const viewDiv = useRef(null);
     const [selectedAttrs, setSelectedAttrs] = useState(null);
     const [featureLayers, setFeatureLayers] = useState([]);
@@ -96,6 +96,7 @@ export default function GeoEnrichedMap({ portalItemId }) {
         const highlightLayer = highlightLayerRef.current;
         setPoints([]);
         setMainPinId(null);
+        onMainPinChange?.(null);
         if (markerLayer) markerLayer.removeAll();
         if (highlightLayer) highlightLayer.removeAll();
     }
@@ -227,11 +228,13 @@ export default function GeoEnrichedMap({ portalItemId }) {
                                         // unselect
                                         markerLayer.remove(graphic);
                                         setMainPinId(null);
+                                        onMainPinChange?.(null);
                                         return null;
                                     } else {
                                         // select this
                                         graphic.symbol = pinSymbol;
                                         setMainPinId(graphic.uid);
+                                        onMainPinChange?.(JSON.stringify(p));
                                         return { ...p, val: 1 };
                                     }
                                 }
@@ -301,9 +304,7 @@ export default function GeoEnrichedMap({ portalItemId }) {
         console.log(markerLayer.graphics.items);
 
         const g = markerLayer.graphics.items.find(g => g.uid === p.id);
-        console.log("Here", g);
         if (!g || !view) return;
-        console.log("not here");
 
 
         // clear old highlight
@@ -369,7 +370,7 @@ export default function GeoEnrichedMap({ portalItemId }) {
                                         onClick={() => handlePointClick(p)}
                                     >
                                         {p.latitude}, {p.longitude} —&nbsp;
-                                        {p.hexagon?.graphic?.attributes?.thematic_value2 != null
+                                        Median Household Income {p.hexagon?.graphic?.attributes?.thematic_value2 != null
                                             ? dollarFormatter.format(p.hexagon.graphic.attributes.thematic_value2)
                                             : 'No $'
                                         }

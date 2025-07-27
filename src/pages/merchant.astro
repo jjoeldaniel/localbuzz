@@ -1,13 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro"
-import MerchantMap from "../components/MerchantMap"
+import MerchantMapWithHeader from "../components/MerchantMapWithHeader.jsx"
+import GeoEnrichedMap from "../components/MerchantMap"
 ---
 
 <Layout>
-    <div class="w-[100%]" style="height: calc(100vh - 24px)">
-        <MerchantMap
-            client:load
-            portalItemId="61cf19d8d39e483ab3ce6fb4d72cb61c"
-        />
+    <div class="w-[100%]" style="height: calc(100vh)">
+        <MerchantMapWithHeader client:load portalItemId="61cf19d8d39e483ab3ce6fb4d72cb61c" />
     </div>
 </Layout>
